@@ -1,0 +1,1463 @@
+<!DOCTYPE html>
+<html lang="fr">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0"
+    >
+
+    <title>Course des arbres - Mesnils-sur-Iton</title>
+
+    <link
+        rel="stylesheet"
+        href="style.css"
+    >
+
+    <link
+        rel="preconnect"
+        href="https://fonts.googleapis.com"
+    >
+
+    <link
+        rel="preconnect"
+        href="https://fonts.gstatic.com"
+        crossorigin
+    >
+
+    <link
+        href="https://fonts.googleapis.com/css2?family=Fredoka:wght@400;500;600;700&display=swap"
+        rel="stylesheet"
+    >
+
+</head>
+
+
+<body>
+
+<main class="page-arbres">
+
+
+    <!-- =========================
+         RETOUR ACCUEIL
+    ========================= -->
+
+    <a
+        href="../index.html"
+        class="retour-accueil"
+    >
+        ← Accueil
+    </a>
+
+
+    <!-- =========================
+         INTRODUCTION
+    ========================= -->
+
+    <section class="intro-arbres">
+
+        <div class="cadre-intro">
+
+            <header class="entete-arbres">
+
+                <h1>
+                    COURSE D'ORIENTATION
+                </h1>
+
+                <h2>
+                    🌳 DÉCOUVERTE DE LA FLORE
+                </h2>
+
+                <p>
+                    Pars à la découverte des arbres
+                    présents autour des étangs de
+                    <strong>Mesnils-sur-Iton</strong>.
+                </p>
+
+            </header>
+
+        </div>
+
+
+        <!-- =========================
+             NOÉ
+        ========================= -->
+
+        <div class="bloc-noe-arbres">
+
+            <img
+                src="images/noe arbres.png"
+                alt="Noé, ton guide nature"
+                class="image-noe-arbres"
+            >
+
+        </div>
+
+    </section>
+
+
+    <!-- =========================
+         PROGRESSION
+    ========================= -->
+
+    <section class="progression-arbres">
+
+        <div class="progression-titre">
+
+            <span>
+                🌳 TA PROGRESSION
+            </span>
+
+            <strong>
+                <span id="nombre-balises">0</span> / 15
+            </strong>
+
+        </div>
+
+
+        <div class="progression-barre">
+
+            <div
+                id="progression-remplie"
+                class="progression-remplie"
+            ></div>
+
+        </div>
+
+
+        <p id="texte-progression">
+            Pars à la recherche des balises !
+        </p>
+
+    </section>
+
+
+    <!-- =========================
+         CARTE DU PARCOURS
+    ========================= -->
+
+    <section class="carte-arbres">
+
+        <h2>
+            CARTE DU PARCOURS
+        </h2>
+
+
+        <div
+            class="image-carte"
+            id="carteZoom"
+        >
+
+            <div class="carte-zoomable">
+
+                <img
+                    src="images/carte-arbres.png"
+                    alt="Carte de la course des arbres"
+                >
+
+
+                <!-- BALISE A -->
+
+                <button
+                    type="button"
+                    class="balise"
+                    id="baliseA"
+                    onclick="ouvrirBalise('A')"
+                ></button>
+
+
+                <!-- BALISE B -->
+
+                <button
+                    type="button"
+                    class="balise"
+                    id="baliseB"
+                    onclick="ouvrirBalise('B')"
+                ></button>
+
+
+                <!-- BALISE D -->
+
+                <button
+                    type="button"
+                    class="balise"
+                    id="baliseD"
+                    onclick="ouvrirBalise('D')"
+                ></button>
+
+
+                <!-- BALISE E -->
+
+                <button
+                    type="button"
+                    class="balise"
+                    id="baliseE"
+                    onclick="ouvrirBalise('E')"
+                ></button>
+
+
+                <!-- BALISE G -->
+
+                <button
+                    type="button"
+                    class="balise"
+                    id="baliseG"
+                    onclick="ouvrirBalise('G')"
+                ></button>
+
+
+                <!-- BALISE H -->
+
+                <button
+                    type="button"
+                    class="balise"
+                    id="baliseH"
+                    onclick="ouvrirBalise('H')"
+                ></button>
+
+
+                <!-- BALISE J -->
+
+                <button
+                    type="button"
+                    class="balise"
+                    id="baliseJ"
+                    onclick="ouvrirBalise('J')"
+                ></button>
+
+
+                <!-- BALISE K -->
+
+                <button
+                    type="button"
+                    class="balise"
+                    id="baliseK"
+                    onclick="ouvrirBalise('K')"
+                ></button>
+
+
+                <!-- BALISE M -->
+
+                <button
+                    type="button"
+                    class="balise"
+                    id="baliseM"
+                    onclick="ouvrirBalise('M')"
+                ></button>
+
+
+                <!-- BALISE N -->
+
+                <button
+                    type="button"
+                    class="balise"
+                    id="baliseN"
+                    onclick="ouvrirBalise('N')"
+                ></button>
+
+
+                <!-- BALISE P -->
+
+                <button
+                    type="button"
+                    class="balise"
+                    id="baliseP"
+                    onclick="ouvrirBalise('P')"
+                ></button>
+
+
+                <!-- BALISE Q -->
+
+                <button
+                    type="button"
+                    class="balise"
+                    id="baliseQ"
+                    onclick="ouvrirBalise('Q')"
+                ></button>
+
+
+                <!-- BALISE S -->
+
+                <button
+                    type="button"
+                    class="balise"
+                    id="baliseS"
+                    onclick="ouvrirBalise('S')"
+                ></button>
+
+
+                <!-- BALISE T -->
+
+                <button
+                    type="button"
+                    class="balise"
+                    id="baliseT"
+                    onclick="ouvrirBalise('T')"
+                ></button>
+
+
+                <!-- BALISE V -->
+
+                <button
+                    type="button"
+                    class="balise"
+                    id="baliseV"
+                    onclick="ouvrirBalise('V')"
+                ></button>
+
+            </div>
+
+        </div>
+
+    </section>
+
+
+    <!-- =========================
+         ARMOIRE À BALISES
+    ========================= -->
+
+    <section class="armoire-balises">
+
+        <div class="armoire-titre">
+
+            <div class="titre-armoire-groupe">
+
+                <span class="icone-armoire">
+                    🌳
+                </span>
+
+                <div>
+
+                    <h2>
+                        MON ARMOIRE À BALISES
+                    </h2>
+
+                    <p>
+                        Retrouve ici les arbres
+                        que tu as découverts.
+                    </p>
+
+                </div>
+
+            </div>
+
+
+            <span id="compteur-armoire">
+                0 / 15
+            </span>
+
+        </div>
+
+
+        <div
+            id="liste-fiches"
+            class="liste-fiches"
+        ></div>
+
+
+        <button
+            type="button"
+            class="bouton-recommencer"
+            onclick="confirmerRecommencer()"
+        >
+            ↻ RECOMMENCER LA COURSE
+        </button>
+
+    </section>
+
+</main>
+
+
+<!-- ==================================================
+     FENÊTRE QUESTION
+================================================== -->
+
+<div
+    id="fenetre-question"
+    class="fenetre-question"
+>
+
+    <div class="contenu-question">
+
+        <button
+            type="button"
+            class="fermer-question"
+            onclick="fermerQuestion()"
+        >
+            ×
+        </button>
+
+
+        <div class="icone-question">
+            🌳
+        </div>
+
+
+        <h2 id="titre-question">
+            Balise A
+        </h2>
+
+
+        <p>
+            Quel est le nom de cet arbre ?
+        </p>
+
+
+        <input
+            type="text"
+            id="reponse-arbre"
+            placeholder="Écris ta réponse..."
+            autocomplete="off"
+        >
+
+
+        <button
+            type="button"
+            class="bouton-valider"
+            onclick="verifierReponse()"
+        >
+            VALIDER
+        </button>
+
+
+        <p id="message-reponse"></p>
+
+    </div>
+
+</div>
+
+
+<!-- ==================================================
+     FENÊTRE FICHE
+================================================== -->
+
+<div
+    id="fenetre-fiche"
+    class="fenetre-fiche"
+>
+
+    <div class="contenu-fiche">
+
+        <button
+            type="button"
+            class="fermer-fiche"
+            onclick="fermerFiche()"
+        >
+            ×
+        </button>
+
+
+        <img
+            id="image-fiche"
+            class="image-fiche"
+            src=""
+            alt="Fiche de l'arbre"
+        >
+
+    </div>
+
+</div>
+
+
+<!-- ==================================================
+     FENÊTRE CONFIRMATION
+================================================== -->
+
+<div
+    id="fenetre-confirmation"
+    class="fenetre-confirmation"
+>
+
+    <div class="contenu-confirmation">
+
+        <div class="icone-confirmation">
+            🔄
+        </div>
+
+
+        <h2>
+            Recommencer la course ?
+        </h2>
+
+
+        <p>
+            Ta progression et toutes les fiches
+            découvertes seront réinitialisées.
+        </p>
+
+
+        <div class="boutons-confirmation">
+
+            <button
+                type="button"
+                class="bouton-annuler"
+                onclick="fermerConfirmation()"
+            >
+                ANNULER
+            </button>
+
+
+            <button
+                type="button"
+                class="bouton-confirmer"
+                onclick="recommencerCourse()"
+            >
+                OUI, RECOMMENCER
+            </button>
+
+        </div>
+
+    </div>
+
+</div>
+
+
+<!-- ==================================================
+     FENÊTRE FIN DE COURSE
+================================================== -->
+
+<div
+    id="fenetre-fin-course"
+    class="fenetre-fin-course"
+>
+
+    <div class="contenu-fin-course">
+
+        <button
+            type="button"
+            class="fermer-fin-course"
+            onclick="fermerFinCourse()"
+        >
+            ×
+        </button>
+
+
+        <img
+            src="images/noe win arbres.png"
+            alt="Félicitations ! Course des arbres terminée"
+            class="image-fin-course"
+            onerror="console.error('Impossible de charger images/noe win arbres.png');"
+        >
+
+    </div>
+
+</div>
+
+
+<!-- ==================================================
+     JAVASCRIPT
+================================================== -->
+
+<script>
+
+
+/* =========================================================
+   NOM DES ARBRES
+========================================================= */
+
+const arbres = {
+
+    A: "Saule pleureur",
+    B: "Frene",
+    D: "Bouleau",
+    E: "Merisier",
+    G: "Platane",
+    H: "Chene",
+    J: "Chataignier",
+    K: "Peuplier",
+    M: "Noyer",
+    N: "Charme",
+    P: "Erable plane",
+    Q: "Sapin",
+    S: "Marronnier",
+    T: "Aulne noir",
+    V: "Hetre"
+
+};
+
+
+/* =========================================================
+   LISTE DES BALISES
+========================================================= */
+
+const balises = [
+
+    "A",
+    "B",
+    "D",
+    "E",
+    "G",
+    "H",
+    "J",
+    "K",
+    "M",
+    "N",
+    "P",
+    "Q",
+    "S",
+    "T",
+    "V"
+
+];
+
+
+/* =========================================================
+   BALISE ACTUELLE
+========================================================= */
+
+let baliseActuelle = "";
+
+
+/* =========================================================
+   OUVRIR UNE BALISE
+========================================================= */
+
+function ouvrirBalise(lettre) {
+
+    baliseActuelle = lettre;
+
+    document.getElementById("titre-question").textContent =
+        "Balise " + lettre;
+
+    document.getElementById("reponse-arbre").value = "";
+
+    document.getElementById("message-reponse").textContent = "";
+
+    document.getElementById("fenetre-question").style.display =
+        "flex";
+
+    setTimeout(function () {
+
+        document.getElementById("reponse-arbre").focus();
+
+    }, 100);
+
+}
+
+
+/* =========================================================
+   FERMER QUESTION
+========================================================= */
+
+function fermerQuestion() {
+
+    document.getElementById("fenetre-question").style.display =
+        "none";
+
+}
+
+
+/* =========================================================
+   NETTOYER TEXTE
+========================================================= */
+
+function nettoyerTexte(texte) {
+
+    return texte
+        .toLowerCase()
+        .normalize("NFD")
+        .replace(/[\u0300-\u036f]/g, "")
+        .replace(/[-']/g, " ")
+        .replace(/\s+/g, " ")
+        .trim();
+
+}
+
+
+/* =========================================================
+   VÉRIFIER RÉPONSE
+========================================================= */
+
+function verifierReponse() {
+
+    const champ =
+        document.getElementById("reponse-arbre");
+
+    const reponse =
+        nettoyerTexte(champ.value);
+
+    const bonneReponse =
+        nettoyerTexte(arbres[baliseActuelle]);
+
+    const message =
+        document.getElementById("message-reponse");
+
+
+    /* =========================
+       BONNE RÉPONSE
+    ========================= */
+
+    if (reponse === bonneReponse) {
+
+        message.textContent =
+            "🎉 Bravo ! Bonne réponse !";
+
+        message.style.color =
+            "#47752a";
+
+
+        /* Enregistrer la balise */
+
+        localStorage.setItem(
+            "balise_" + baliseActuelle,
+            "decouverte"
+        );
+
+
+        /* Marquer sur la carte */
+
+        const balise =
+            document.getElementById(
+                "balise" + baliseActuelle
+            );
+
+        if (balise) {
+
+            balise.classList.add("decouverte");
+
+        }
+
+
+        /* Mise à jour */
+
+        mettreAJourProgression();
+
+        mettreAJourArmoire();
+
+
+        /* Afficher la fiche */
+
+        const lettreFiche = baliseActuelle;
+
+        setTimeout(function () {
+
+            fermerQuestion();
+
+            afficherFiche(lettreFiche);
+
+        }, 700);
+
+    }
+
+
+    /* =========================
+       MAUVAISE RÉPONSE
+    ========================= */
+
+    else {
+
+        message.textContent =
+            "❌ Ce n'est pas la bonne réponse. Essaie encore !";
+
+        message.style.color =
+            "#c44b32";
+
+    }
+
+}
+
+
+/* =========================================================
+   AFFICHER FICHE
+========================================================= */
+
+function afficherFiche(lettre) {
+
+    const image =
+        document.getElementById("image-fiche");
+
+    image.src =
+        "images/Fiches/" + lettre + ".png";
+
+    image.alt =
+        "Fiche de " + arbres[lettre];
+
+    document.getElementById("fenetre-fiche").style.display =
+        "flex";
+
+}
+
+
+/* =========================================================
+   FERMER FICHE
+========================================================= */
+
+function fermerFiche() {
+
+    document.getElementById("fenetre-fiche").style.display =
+        "none";
+
+
+    /*
+       On vérifie immédiatement si les
+       15 balises sont découvertes.
+    */
+
+    const courseTerminee =
+        balises.every(function (lettre) {
+
+            return localStorage.getItem(
+                "balise_" + lettre
+            ) === "decouverte";
+
+        });
+
+
+    /*
+       Si les 15 arbres sont découverts,
+       on affiche Noé WIN.
+    */
+
+    if (courseTerminee) {
+
+        setTimeout(function () {
+
+            afficherFinCourse();
+
+        }, 200);
+
+    }
+
+}
+
+
+/* =========================================================
+   AFFICHER FIN DE COURSE
+========================================================= */
+
+function afficherFinCourse() {
+
+    const fenetre =
+        document.getElementById(
+            "fenetre-fin-course"
+        );
+
+    if (!fenetre) {
+
+        console.error(
+            "La fenêtre de fin de course est introuvable."
+        );
+
+        return;
+
+    }
+
+
+    const image =
+        document.querySelector(
+            ".image-fin-course"
+        );
+
+    if (!image) {
+
+        console.error(
+            "L'image Noé Win est introuvable."
+        );
+
+        return;
+
+    }
+
+
+    /*
+       Vérification du chemin de l'image
+    */
+
+    image.src =
+        "images/noe win arbres.png";
+
+
+    /*
+       Affichage
+    */
+
+    fenetre.style.display =
+        "flex";
+
+}
+
+
+/* =========================================================
+   FERMER FIN DE COURSE
+========================================================= */
+
+function fermerFinCourse() {
+
+    document.getElementById(
+        "fenetre-fin-course"
+    ).style.display = "none";
+
+}
+
+
+/* =========================================================
+   METTRE À JOUR PROGRESSION
+========================================================= */
+
+function mettreAJourProgression() {
+
+    let nombreValidees = 0;
+
+
+    balises.forEach(function (lettre) {
+
+        if (
+            localStorage.getItem(
+                "balise_" + lettre
+            ) === "decouverte"
+        ) {
+
+            nombreValidees++;
+
+        }
+
+    });
+
+
+    document.getElementById(
+        "nombre-balises"
+    ).textContent =
+        nombreValidees;
+
+
+    const pourcentage =
+        (nombreValidees / balises.length) * 100;
+
+
+    document.getElementById(
+        "progression-remplie"
+    ).style.width =
+        pourcentage + "%";
+
+
+    const texte =
+        document.getElementById(
+            "texte-progression"
+        );
+
+
+    if (nombreValidees === 0) {
+
+        texte.textContent =
+            "Pars à la recherche des balises !";
+
+    }
+
+    else if (nombreValidees < balises.length) {
+
+        texte.textContent =
+            "Continue ton exploration des étangs !";
+
+    }
+
+    else {
+
+        texte.textContent =
+            "🎉 Bravo ! Tu as découvert tous les arbres !";
+
+    }
+
+}
+
+
+/* =========================================================
+   METTRE À JOUR ARMOIRE
+========================================================= */
+
+function mettreAJourArmoire() {
+
+    const armoire =
+        document.getElementById(
+            "liste-fiches"
+        );
+
+    const compteur =
+        document.getElementById(
+            "compteur-armoire"
+        );
+
+
+    armoire.innerHTML = "";
+
+
+    let nombreValidees = 0;
+
+
+    balises.forEach(function (lettre) {
+
+        const estDecouverte =
+            localStorage.getItem(
+                "balise_" + lettre
+            ) === "decouverte";
+
+
+        if (estDecouverte) {
+
+            nombreValidees++;
+
+        }
+
+
+        const bouton =
+            document.createElement("button");
+
+        bouton.type =
+            "button";
+
+        bouton.className =
+            "case-balise";
+
+
+        /* =========================
+           BALISE DÉCOUVERTE
+        ========================= */
+
+        if (estDecouverte) {
+
+            bouton.classList.add(
+                "decouverte"
+            );
+
+
+            bouton.innerHTML = `
+
+                <span class="lettre-balise">
+                    ${lettre}
+                </span>
+
+                <span class="nom-arbre">
+                    ${arbres[lettre]}
+                </span>
+
+            `;
+
+
+            bouton.onclick =
+                function () {
+
+                    afficherFiche(lettre);
+
+                };
+
+        }
+
+
+        /* =========================
+           BALISE VERROUILLÉE
+        ========================= */
+
+        else {
+
+            bouton.classList.add(
+                "verrouillee"
+            );
+
+
+            bouton.innerHTML = `
+
+                <span class="cadenas">
+                    🔒
+                </span>
+
+                <span class="lettre-cachee">
+                    ${lettre}
+                </span>
+
+            `;
+
+        }
+
+
+        armoire.appendChild(
+            bouton
+        );
+
+    });
+
+
+    compteur.textContent =
+        nombreValidees +
+        " / " +
+        balises.length;
+
+}
+
+
+/* =========================================================
+   RESTAURER LES BALISES SUR LA CARTE
+========================================================= */
+
+balises.forEach(function (lettre) {
+
+    if (
+        localStorage.getItem(
+            "balise_" + lettre
+        ) === "decouverte"
+    ) {
+
+        const balise =
+            document.getElementById(
+                "balise" + lettre
+            );
+
+        if (balise) {
+
+            balise.classList.add(
+                "decouverte"
+            );
+
+        }
+
+    }
+
+});
+
+
+/* =========================================================
+   INITIALISATION
+========================================================= */
+
+mettreAJourProgression();
+
+mettreAJourArmoire();
+
+
+/* =========================================================
+   VALIDATION AVEC LA TOUCHE ENTRÉE
+========================================================= */
+
+document
+    .getElementById("reponse-arbre")
+    .addEventListener(
+        "keydown",
+        function (event) {
+
+            if (event.key === "Enter") {
+
+                event.preventDefault();
+
+                verifierReponse();
+
+            }
+
+        }
+    );
+
+
+/* =========================================================
+   CONFIRMATION RECOMMENCER
+========================================================= */
+
+function confirmerRecommencer() {
+
+    document.getElementById(
+        "fenetre-confirmation"
+    ).style.display =
+        "flex";
+
+}
+
+
+/* =========================================================
+   FERMER CONFIRMATION
+========================================================= */
+
+function fermerConfirmation() {
+
+    document.getElementById(
+        "fenetre-confirmation"
+    ).style.display =
+        "none";
+
+}
+
+
+/* =========================================================
+   RECOMMENCER LA COURSE
+========================================================= */
+
+function recommencerCourse() {
+
+    /*
+       Supprimer toutes les balises
+    */
+
+    balises.forEach(function (lettre) {
+
+        localStorage.removeItem(
+            "balise_" + lettre
+        );
+
+    });
+
+
+    /*
+       Fermer toutes les fenêtres
+    */
+
+    fermerConfirmation();
+
+    fermerQuestion();
+
+    fermerFiche();
+
+    fermerFinCourse();
+
+
+    /*
+       Retirer les statuts de découverte
+       sur la carte
+    */
+
+    balises.forEach(function (lettre) {
+
+        const balise =
+            document.getElementById(
+                "balise" + lettre
+            );
+
+        if (balise) {
+
+            balise.classList.remove(
+                "decouverte"
+            );
+
+        }
+
+    });
+
+
+    /*
+       Actualiser l'affichage
+    */
+
+    mettreAJourProgression();
+
+    mettreAJourArmoire();
+
+}
+
+
+/* =========================================================
+   ZOOM TACTILE DE LA CARTE
+========================================================= */
+
+const zoneCarte =
+    document.querySelector(".image-carte");
+
+const carteZoom =
+    document.querySelector(".carte-zoomable");
+
+
+let zoom = 1;
+
+let positionX = 0;
+let positionY = 0;
+
+let distanceDepart = 0;
+let zoomDepart = 1;
+
+let dernierX = 0;
+let dernierY = 0;
+
+
+/* =========================================================
+   DISTANCE ENTRE DEUX DOIGTS
+========================================================= */
+
+function distanceDoigts(touches) {
+
+    const dx =
+        touches[0].clientX -
+        touches[1].clientX;
+
+    const dy =
+        touches[0].clientY -
+        touches[1].clientY;
+
+    return Math.sqrt(
+        dx * dx + dy * dy
+    );
+
+}
+
+
+/* =========================================================
+   APPLIQUER LE ZOOM
+========================================================= */
+
+function appliquerZoom() {
+
+    carteZoom.style.transform =
+        `translate3d(${positionX}px, ${positionY}px, 0) scale(${zoom})`;
+
+}
+
+
+/* =========================================================
+   TOUCH START
+========================================================= */
+
+zoneCarte.addEventListener(
+    "touchstart",
+    function (event) {
+
+        if (event.touches.length === 2) {
+
+            distanceDepart =
+                distanceDoigts(
+                    event.touches
+                );
+
+            zoomDepart =
+                zoom;
+
+        }
+
+        else if (
+            event.touches.length === 1 &&
+            zoom > 1
+        ) {
+
+            dernierX =
+                event.touches[0].clientX;
+
+            dernierY =
+                event.touches[0].clientY;
+
+        }
+
+    },
+    {
+        passive: false
+    }
+);
+
+
+/* =========================================================
+   TOUCH MOVE
+========================================================= */
+
+zoneCarte.addEventListener(
+    "touchmove",
+    function (event) {
+
+        event.preventDefault();
+
+
+        /* =========================
+           ZOOM DEUX DOIGTS
+        ========================= */
+
+        if (event.touches.length === 2) {
+
+            const distanceActuelle =
+                distanceDoigts(
+                    event.touches
+                );
+
+
+            const facteur =
+                distanceActuelle /
+                distanceDepart;
+
+
+            zoom =
+                zoomDepart *
+                facteur;
+
+
+            zoom =
+                Math.max(
+                    1,
+                    Math.min(
+                        3,
+                        zoom
+                    )
+                );
+
+
+            appliquerZoom();
+
+        }
+
+
+        /* =========================
+           DÉPLACEMENT UN DOIGT
+        ========================= */
+
+        else if (
+            event.touches.length === 1 &&
+            zoom > 1
+        ) {
+
+            const x =
+                event.touches[0].clientX;
+
+            const y =
+                event.touches[0].clientY;
+
+
+            positionX +=
+                x - dernierX;
+
+            positionY +=
+                y - dernierY;
+
+
+            dernierX =
+                x;
+
+            dernierY =
+                y;
+
+
+            appliquerZoom();
+
+        }
+
+    },
+    {
+        passive: false
+    }
+);
+
+
+/* =========================================================
+   TOUCH END
+========================================================= */
+
+zoneCarte.addEventListener(
+    "touchend",
+    function (event) {
+
+        if (event.touches.length < 2) {
+
+            distanceDepart = 0;
+
+        }
+
+
+        if (zoom <= 1.01) {
+
+            zoom = 1;
+
+            positionX = 0;
+            positionY = 0;
+
+            appliquerZoom();
+
+        }
+
+    }
+);
+
+
+</script>
+
+</body>
+
+</html>

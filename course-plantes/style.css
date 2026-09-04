@@ -1,0 +1,959 @@
+/* =========================================================
+   BASE
+========================================================= */
+
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+html {
+    scroll-behavior: smooth;
+}
+
+body {
+    font-family: "Fredoka", sans-serif;
+    color: #173d2b;
+    background: #f5f3e8;
+}
+
+
+/* =========================================================
+   FOND FIXE
+========================================================= */
+
+/* =========================================================
+   FOND FIXE DU SITE
+========================================================= */
+
+body::before {
+    content: "";
+
+    position: fixed;
+    inset: 0;
+
+    z-index: -2;
+
+    background-image:
+        linear-gradient(
+            to bottom,
+            rgba(255, 255, 255, 0.87) 0%,
+            rgba(255, 255, 255, 0.85) 18%,
+            rgba(255, 255, 255, 0.77) 30%,
+            rgba(255, 255, 255, 0.63) 40%,
+            rgba(255, 255, 255, 0.43) 48%,
+            rgba(255, 255, 255, 0.23) 55%,
+            rgba(255, 255, 255, 0) 63%
+        ),
+        url("../images/fond-accueil.png");
+
+    background-size: cover;
+    background-position: center top;
+    background-repeat: no-repeat;
+}
+
+
+/* =========================================================
+   PAGE
+========================================================= */
+
+.page-plantes {
+    min-height: 100vh;
+    padding-bottom: 40px;
+}
+
+
+/* =========================================================
+   RETOUR ACCUEIL
+========================================================= */
+
+.retour-accueil {
+    display: inline-block;
+
+    margin: 15px 20px 0;
+
+    color: #174d35;
+
+    font-size: 15px;
+    font-weight: 600;
+
+    text-decoration: none;
+
+    position: relative;
+    z-index: 10;
+}
+
+.retour-accueil:hover {
+    text-decoration: underline;
+}
+
+
+/* =========================================================
+   INTRODUCTION
+========================================================= */
+
+.intro-plantes {
+    width: 100%;
+
+    padding: 15px 20px 0;
+
+    text-align: center;
+}
+
+
+.cadre-intro {
+    width: 100%;
+    max-width: 600px;
+
+    margin: 0 auto;
+
+    padding: 22px 20px;
+
+    background: rgba(255, 255, 255, 0.88);
+
+    border-radius: 25px;
+
+    box-shadow:
+        0 6px 16px rgba(0, 0, 0, 0.12);
+}
+
+
+/* =========================================================
+   ENTÊTE
+========================================================= */
+
+.entete-plantes h1 {
+    color: #f05a3c;
+
+    font-size: 34px;
+
+    line-height: 1;
+
+    letter-spacing: 1px;
+
+    font-weight: 700;
+
+    margin-bottom: 10px;
+}
+
+
+.entete-plantes h2 {
+    color: #39755a;
+
+    font-size: 22px;
+
+    line-height: 1.1;
+
+    font-weight: 700;
+
+    margin-bottom: 10px;
+}
+
+
+.entete-plantes p {
+    color: #30483a;
+
+    font-size: 14px;
+
+    line-height: 1.35;
+}
+
+
+.entete-plantes strong {
+    color: #47752a;
+}
+
+
+/* =========================================================
+   NOÉ
+========================================================= */
+
+.bloc-noe-plantes {
+    width: 100%;
+    max-width: 560px;
+
+    margin: 10px auto 10px;
+
+    display: flex;
+
+    justify-content: center;
+    align-items: center;
+}
+
+
+.image-noe-plantes {
+    display: block;
+
+    width: 100%;
+    max-width: 560px;
+
+    height: auto;
+
+    object-fit: contain;
+
+    margin: 0 auto;
+}
+
+
+/* =========================================================
+   EXPLICATION
+========================================================= */
+
+.explication-plantes {
+    width: 100%;
+    max-width: 560px;
+
+    margin: 5px auto 0;
+
+    padding: 15px 18px;
+
+    background: rgba(220, 239, 208, 0.82);
+
+    border-radius: 20px;
+}
+
+
+.explication-plantes p {
+    color: #30483a;
+
+    font-size: 14px;
+
+    line-height: 1.4;
+
+    margin-bottom: 10px;
+}
+
+
+.explication-plantes p:last-child {
+    margin-bottom: 0;
+}
+
+
+/* =========================================================
+   PROGRESSION
+========================================================= */
+
+.progression-plantes {
+    width: calc(100% - 40px);
+    max-width: 600px;
+
+    margin: 15px auto 20px;
+
+    padding: 18px 20px;
+
+    background: rgba(255, 255, 255, 0.88);
+
+    border-radius: 25px;
+
+    box-shadow:
+        0 6px 16px rgba(0, 0, 0, 0.12);
+
+    text-align: center;
+}
+
+
+
+.progression-titre {
+    display: flex;
+
+    justify-content: space-between;
+    align-items: center;
+
+    margin-bottom: 8px;
+
+    color: #174d35;
+
+    font-size: 16px;
+    font-weight: 600;
+}
+
+
+.progression-titre strong {
+    color: #f05a3c;
+
+    font-size: 18px;
+}
+
+
+/* =========================================================
+   BARRE DE PROGRESSION
+========================================================= */
+
+.progression-barre {
+    width: 100%;
+
+    height: 14px;
+
+    overflow: hidden;
+
+    background: rgba(225, 225, 218, 0.9);
+
+    border-radius: 20px;
+
+    box-shadow:
+        inset 0 2px 5px rgba(0, 0, 0, 0.12);
+}
+
+
+.progression-remplie {
+    width: 0%;
+
+    height: 100%;
+
+    background: #39755a;
+
+    border-radius: 20px;
+
+    transition: width 0.4s ease;
+}
+
+
+#texte-progression-plantes {
+    margin-top: 8px;
+
+    color: #47752a;
+
+    font-size: 13px;
+}
+
+
+/* =========================================================
+   NAVIGATION
+========================================================= */
+
+.navigation-plantes {
+    width: 100%;
+    max-width: 600px;
+
+    margin: 0 auto 20px;
+
+    padding: 0 20px;
+
+    display: flex;
+
+    gap: 12px;
+}
+
+
+.bouton-navigation {
+    flex: 1;
+
+    min-height: 52px;
+
+    border: none;
+
+    border-radius: 22px;
+
+    background: rgba(255, 255, 255, 0.94);
+
+    color: #174d35;
+
+    font-family: "Fredoka", sans-serif;
+
+    font-size: 15px;
+    font-weight: 600;
+
+    cursor: pointer;
+
+    box-shadow:
+        0 5px 12px rgba(0, 0, 0, 0.12);
+
+    transition:
+        transform 0.2s ease,
+        box-shadow 0.2s ease,
+        background 0.2s ease;
+}
+
+
+.bouton-navigation:hover {
+    transform: translateY(-2px);
+
+    background: white;
+
+    box-shadow:
+        0 7px 15px rgba(0, 0, 0, 0.17);
+}
+
+
+.bouton-navigation:active {
+    transform: scale(0.98);
+}
+
+
+.bouton-navigation span {
+    margin-left: 5px;
+}
+
+
+/* =========================================================
+   ZONES PRINCIPALES
+========================================================= */
+
+.zone-plantes {
+    width: 100%;
+    max-width: 700px;
+
+    margin: 0 auto 25px;
+
+    padding: 0 15px;
+}
+
+
+.cadre-zone-plantes {
+    width: 100%;
+
+    padding: 20px;
+
+    background: rgba(255, 255, 255, 0.90);
+
+    border-radius: 25px;
+
+    box-shadow:
+        0 7px 18px rgba(0, 0, 0, 0.14);
+}
+
+
+.cadre-zone-plantes h2 {
+    margin-bottom: 15px;
+
+    color: #f05a3c;
+
+    font-size: 22px;
+
+    text-align: center;
+
+    font-weight: 700;
+}
+
+
+/* =========================================================
+   ZONE CARTE
+========================================================= */
+
+#zone-carte {
+    display: none;
+}
+
+
+/*
+   Quand le JavaScript affichera la carte,
+   elle pourra prendre toute la largeur.
+*/
+
+#zone-carte .cadre-zone-plantes {
+    padding: 15px;
+}
+
+
+/* =========================================================
+   ZONE FORMES
+========================================================= */
+
+#zone-formes {
+    display: none;
+}
+
+
+.texte-zone-formes {
+    margin-bottom: 18px;
+
+    color: #30483a;
+
+    font-size: 14px;
+
+    line-height: 1.4;
+
+    text-align: center;
+}
+
+.texte-zone-formes-infos {
+    margin-top: 10px;
+
+    color: #30483a;
+
+    font-size: 14px;
+
+    line-height: 1.4;
+
+    text-align: center;
+}
+/* =========================================================
+   GRILLE DES FORMES
+========================================================= */
+
+.grille-formes {
+    display: grid;
+
+    grid-template-columns: repeat(3, 1fr);
+
+    gap: 12px;
+
+    width: 100%;
+}
+.grille-formes .bouton-forme:last-child {
+    grid-column: 2;
+}
+
+/* =========================================================
+   FUTURS BOUTONS DE FORMES
+========================================================= */
+
+.bouton-forme {
+    min-height: 85px;
+
+    padding: 10px;
+
+    border: 2px solid transparent;
+
+    border-radius: 18px;
+
+    background: rgba(220, 239, 208, 0.85);
+
+    color: #174d35;
+
+    font-family: "Fredoka", sans-serif;
+
+    font-size: 13px;
+    font-weight: 600;
+
+    cursor: pointer;
+
+    box-shadow:
+        0 4px 9px rgba(0, 0, 0, 0.10);
+
+    transition:
+        transform 0.2s ease,
+        box-shadow 0.2s ease,
+        background 0.2s ease,
+        border-color 0.2s ease;
+}
+
+
+.bouton-forme:hover {
+    transform: translateY(-2px);
+
+    background: rgba(210, 232, 197, 0.95);
+
+    box-shadow:
+        0 6px 12px rgba(0, 0, 0, 0.15);
+}
+
+
+.bouton-forme:active {
+    transform: scale(0.97);
+}
+
+.nombre-lettres {
+    display: block;
+
+    margin-top: 8px;
+
+    color: #30483a;
+
+    font-size: 12px;
+    font-weight: 600;
+
+    text-align: center;
+}
+/* =========================================================
+   ICÔNE DES FORMES
+========================================================= */
+
+.icone-forme {
+    display: block;
+
+    margin-bottom: 5px;
+
+    font-size: 30px;
+}
+
+
+/* =========================================================
+   NOM DE LA PLANTE
+========================================================= */
+
+.nom-forme {
+    display: block;
+
+    color: #30483a;
+
+    font-size: 11px;
+
+    line-height: 1.1;
+
+    text-align: center;
+}
+
+
+/* =========================================================
+   MOBILE PORTRAIT
+========================================================= */
+
+@media (max-width: 900px) and (orientation: portrait) {
+
+    .retour-accueil {
+        margin: 12px 15px 0;
+
+        font-size: 14px;
+    }
+
+
+    .intro-plantes {
+        padding: 10px 15px 0;
+    }
+
+
+    .cadre-intro {
+        padding: 18px 15px;
+
+        border-radius: 22px;
+    }
+
+
+    .entete-plantes h1 {
+        font-size: 28px;
+    }
+
+
+    .entete-plantes h2 {
+        font-size: 19px;
+    }
+
+
+    .entete-plantes p {
+        font-size: 12px;
+    }
+
+
+    /* ---------- NOÉ ---------- */
+
+    .bloc-noe-plantes {
+        margin: 5px auto 8px;
+    }
+
+
+    .image-noe-plantes {
+        width: 390px;
+
+        max-width: 95vw;
+    }
+
+
+    /* ---------- EXPLICATION ---------- */
+
+    .explication-plantes {
+        padding: 13px 15px;
+
+        border-radius: 18px;
+    }
+
+
+    .explication-plantes p {
+        font-size: 12px;
+    }
+
+
+    /* ---------- PROGRESSION ---------- */
+
+    .progression-plantes {
+        margin: 8px auto 18px;
+
+        padding: 15px;
+
+        border-radius: 22px;
+    }
+
+
+    .progression-titre {
+        font-size: 14px;
+    }
+
+
+    .progression-titre strong {
+        font-size: 16px;
+    }
+
+
+    #texte-progression-plantes {
+        font-size: 12px;
+    }
+
+
+    /* ---------- NAVIGATION ---------- */
+
+    .navigation-plantes {
+        padding: 0 15px;
+
+        gap: 8px;
+    }
+
+
+    .bouton-navigation {
+        min-height: 48px;
+
+        border-radius: 20px;
+
+        font-size: 13px;
+    }
+
+
+    /* ---------- ZONES ---------- */
+
+    .zone-plantes {
+        padding: 0 10px;
+
+        margin-bottom: 20px;
+    }
+
+
+    .cadre-zone-plantes {
+        padding: 16px;
+
+        border-radius: 22px;
+    }
+
+
+    .cadre-zone-plantes h2 {
+        font-size: 19px;
+
+        margin-bottom: 12px;
+    }
+
+
+    /* ---------- FORMES ---------- */
+
+    .grille-formes {
+        grid-template-columns: repeat(3, 1fr);
+
+        gap: 8px;
+    }
+
+
+    .bouton-forme {
+        min-height: 72px;
+
+        border-radius: 15px;
+
+        padding: 7px;
+    }
+
+
+    .icone-forme {
+        font-size: 25px;
+    }
+
+
+    .nom-forme {
+        font-size: 9px;
+    }
+
+}
+
+
+/* =========================================================
+   TRÈS PETITS TÉLÉPHONES
+========================================================= */
+
+@media (max-width: 380px) and (orientation: portrait) {
+
+    .entete-plantes h1 {
+        font-size: 25px;
+    }
+
+
+    .entete-plantes h2 {
+        font-size: 17px;
+    }
+
+
+    .image-noe-plantes {
+        width: 350px;
+
+        max-width: 95vw;
+    }
+
+
+    .progression-plantes {
+        padding: 13px;
+    }
+
+
+    .navigation-plantes {
+        flex-direction: column;
+    }
+
+
+    .bouton-navigation {
+        width: 100%;
+    }
+
+
+    .grille-formes {
+        grid-template-columns: repeat(2, 1fr);
+
+        gap: 8px;
+    }
+
+
+    .bouton-forme {
+        min-height: 70px;
+    }
+
+}
+
+
+/* =========================================================
+   MOBILE PAYSAGE
+========================================================= */
+
+@media (max-width: 900px) and (orientation: landscape) {
+
+    .intro-plantes {
+        padding: 8px 20px 0;
+    }
+
+
+    .cadre-intro {
+        padding: 15px 20px;
+    }
+
+
+    .entete-plantes h1 {
+        font-size: 28px;
+    }
+
+
+    .entete-plantes h2 {
+        font-size: 19px;
+    }
+
+
+    .entete-plantes p {
+        font-size: 12px;
+    }
+
+
+    .image-noe-plantes {
+        width: 420px;
+
+        max-width: 85vw;
+    }
+
+
+    .progression-plantes {
+        margin-bottom: 15px;
+    }
+
+
+    .navigation-plantes {
+        max-width: 700px;
+    }
+
+
+    .zone-plantes {
+        max-width: 750px;
+    }
+
+
+    .grille-formes {
+        grid-template-columns: repeat(5, 1fr);
+
+        gap: 8px;
+    }
+
+
+    .bouton-forme {
+        min-height: 70px;
+    }
+
+
+    .nom-forme {
+        font-size: 9px;
+    }
+
+}
+
+
+/* =========================
+   CARTE DU PARCOURS
+========================= */
+
+.carte-zoom-container {
+    width: 100%;
+    position: relative;
+    overflow: hidden;
+    border-radius: 15px;
+    line-height: 0;
+}
+
+.carte-plantes-image {
+    display: block;
+    width: 100%;
+    height: auto;
+    max-width: 100%;
+    margin: 0;
+    border-radius: 15px;
+}
+
+
+/* =========================
+   ZOOM UNIQUEMENT SUR MOBILE
+========================= */
+
+@media (max-width: 900px) {
+
+    .carte-zoom-container {
+        width: 100%;
+        height: auto;
+        min-height: 0;
+        overflow: hidden;
+        position: relative;
+        border-radius: 15px;
+        touch-action: none;
+    }
+
+    .carte-zoom-container .carte-plantes-image {
+        position: relative;
+        display: block;
+
+        width: 100%;
+        height: auto;
+        max-width: none;
+
+        left: 0;
+        top: 0;
+
+        transform-origin: center center;
+
+        user-select: none;
+        -webkit-user-drag: none;
+        touch-action: none;
+
+        transition: transform 0.08s linear;
+    }
+
+}
+
+
+/* =========================
+   ORDINATEUR : CARTE NORMALE
+========================= */
+
+@media (min-width: 901px) {
+
+    .carte-zoom-container {
+        height: auto;
+        overflow: hidden;
+    }
+
+    .carte-zoom-container .carte-plantes-image {
+        position: static;
+        display: block;
+        width: 100%;
+        height: auto;
+        max-width: 100%;
+        transform: none !important;
+    }
+
+}

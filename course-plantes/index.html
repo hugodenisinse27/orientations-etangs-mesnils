@@ -1,0 +1,2462 @@
+<!DOCTYPE html>
+<html lang="fr">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0"
+    >
+
+    <title>Course des plantes</title>
+
+    <link
+        href="https://fonts.googleapis.com/css2?family=Fredoka:wght@400;500;600;700&display=swap"
+        rel="stylesheet"
+    >
+
+    <link rel="stylesheet" href="style.css">
+
+
+<style>
+.progression-mot {
+    margin: 20px 0;
+    text-align: center;
+}
+
+.lettres-pendu {
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+    gap: 8px;
+    margin: 12px 0;
+}
+
+.lettre-trouvee,
+.lettre-cachee {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    min-width: 32px;
+    height: 40px;
+    font-size: 24px;
+    font-weight: 700;
+}
+
+.lettre-cachee {
+    border-bottom: 3px solid currentColor;
+}
+
+.lettre-trouvee {
+    border-bottom: 3px solid currentColor;
+}
+</style>
+
+
+<style>
+.zone-deviner-plante {
+    margin: 20px 0;
+    padding: 18px;
+    text-align: center;
+}
+
+.zone-deviner-plante select,
+.zone-deviner-plante button {
+    display: block;
+    width: min(100%, 360px);
+    margin: 10px auto;
+    min-height: 44px;
+    font: inherit;
+}
+
+.zone-deviner-plante h3 {
+    margin-bottom: 10px;
+}
+
+#message-plante {
+    font-weight: 600;
+}
+</style>
+
+
+<style>
+.bloc-balise {
+    margin: 18px auto 0;
+    padding: 18px 16px;
+    text-align: center;
+    max-width: 520px;
+    box-sizing: border-box;
+}
+
+.bloc-balise p {
+    margin: 8px 0;
+    font-size: 18px;
+}
+
+.lettre-balise {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 76px;
+    height: 76px;
+    margin: 14px auto 16px;
+    border-radius: 18px;
+    font-size: 42px;
+    font-weight: 700;
+    line-height: 1;
+    background: white;
+    border: 3px solid currentColor;
+    box-sizing: border-box;
+}
+
+.validation-balise {
+    margin-top: 18px;
+}
+
+.validation-balise input {
+    width: 90px;
+    height: 44px;
+    text-align: center;
+    font-size: 24px;
+    font-weight: 700;
+    box-sizing: border-box;
+}
+
+.validation-balise button {
+    min-height: 44px;
+    margin-left: 6px;
+    padding: 8px 16px;
+    font: inherit;
+    font-weight: 600;
+    cursor: pointer;
+}
+
+#message-balise {
+    font-weight: 600;
+}
+
+@media (max-width: 600px) {
+    .bloc-balise {
+        padding: 14px 8px;
+    }
+
+    .bloc-balise p {
+        font-size: 16px;
+    }
+
+    .lettre-balise {
+        width: 68px;
+        height: 68px;
+        font-size: 38px;
+    }
+
+    .validation-balise input {
+        width: 80px;
+    }
+
+    .validation-balise button {
+        margin-left: 4px;
+    }
+}
+</style>
+
+
+<style>
+.lettre-balise:empty {
+    display: none;
+}
+</style>
+
+
+<style>
+.zone-recommencer-plantes {
+    width: 100%;
+    text-align: center;
+    margin: 28px auto 12px;
+    padding-top: 8px;
+}
+
+.bouton-recommencer-plantes {
+    min-height: 46px;
+    padding: 10px 22px;
+    border: none;
+    border-radius: 14px;
+    font: inherit;
+    font-weight: 600;
+    cursor: pointer;
+}
+</style>
+
+
+<style>
+.progression-mot {
+    margin: 20px 0;
+    text-align: center;
+}
+
+.lettres-pendu {
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+    gap: 12px;
+    margin: 12px 0;
+}
+
+.lettre-trouvee {
+    display: inline-block;
+    font-size: 28px;
+    font-weight: 700;
+    line-height: 1.2;
+}
+
+.lettre-cachee {
+    display: none !important;
+}
+</style>
+
+
+<style>
+.niveau-forme {
+    display: block;
+    margin-top: 6px;
+    font-size: 14px;
+    font-weight: 600;
+}
+</style>
+
+
+<style>
+.bouton-forme.forme-terminee {
+    position: relative;
+}
+
+.badge-forme-terminee {
+    display: block;
+    margin-top: 6px;
+    font-size: 13px;
+    font-weight: 700;
+}
+</style>
+
+
+<style>
+/* Sépare visuellement la devinette de la zone des lettres */
+
+#zone-deviner-plante {
+    margin: 18px 0 28px;
+    padding: 22px 20px 24px;
+    border-radius: 20px;
+    background: rgba(255, 255, 255, 0.72);
+    border: 2px solid rgba(54, 105, 78, 0.18);
+    box-shadow: 0 4px 14px rgba(0, 0, 0, 0.06);
+}
+
+#zone-deviner-plante h2 {
+    margin-top: 0;
+}
+
+#zone-deviner-plante + .progression-mot {
+    margin-top: 30px;
+    padding-top: 24px;
+    border-top: 2px dashed rgba(54, 105, 78, 0.22);
+}
+
+@media (max-width: 600px) {
+    #zone-deviner-plante {
+        margin: 14px 0 24px;
+        padding: 18px 14px 20px;
+        border-radius: 18px;
+    }
+}
+</style>
+
+
+<style>
+/* Design de la fiche plante */
+
+.fiche-plante {
+    position: relative;
+    margin: 28px auto 10px;
+    padding: 22px 18px 20px;
+    width: min(100%, 760px);
+    box-sizing: border-box;
+    text-align: center;
+    border-radius: 24px;
+    background: rgba(255, 255, 255, 0.88);
+    border: 2px solid rgba(54, 105, 78, 0.18);
+    box-shadow: 0 8px 22px rgba(0, 0, 0, 0.08);
+    overflow: hidden;
+}
+
+.fiche-plante::before {
+    content: "";
+    position: absolute;
+    left: 0;
+    right: 0;
+    top: 0;
+    height: 7px;
+    background: #f15a3a;
+}
+
+.fiche-plante h3 {
+    margin: 2px 0 18px;
+    color: #174a35;
+    font-size: clamp(20px, 4vw, 27px);
+    font-weight: 700;
+}
+
+.fiche-plante img {
+    display: block;
+    width: min(100%, 680px);
+    max-height: 900px;
+    height: auto;
+    margin: 0 auto;
+    border-radius: 16px;
+    box-shadow: 0 4px 14px rgba(0, 0, 0, 0.07);
+}
+
+@media (max-width: 600px) {
+
+    .fiche-plante {
+        margin: 22px auto 8px;
+        padding: 18px 10px 14px;
+        border-radius: 20px;
+    }
+
+    .fiche-plante h3 {
+        margin-bottom: 14px;
+    }
+
+    .fiche-plante img {
+        width: 100%;
+        border-radius: 12px;
+        box-shadow: none;
+    }
+}
+
+
+/* =========================================================
+   FENÊTRE DE FÉLICITATIONS - FIN DE COURSE
+========================================================= */
+
+.fenetre-fin-course {
+    display: none;
+    position: fixed;
+    inset: 0;
+    z-index: 99999;
+
+    width: 100%;
+    height: 100%;
+
+    align-items: center;
+    justify-content: center;
+
+    padding: 20px;
+    box-sizing: border-box;
+
+    background: rgba(0, 0, 0, 0.70);
+}
+
+
+/* CONTENEUR DE L'IMAGE */
+
+.contenu-fin-course {
+    position: relative;
+
+    width: auto;
+    max-width: 90vw;
+    max-height: 90vh;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+
+/* IMAGE DE FÉLICITATIONS */
+
+.image-fin-course {
+    display: block;
+
+    width: auto;
+    height: auto;
+
+    max-width: 90vw;
+    max-height: 85vh;
+
+    object-fit: contain;
+
+    border-radius: 20px;
+
+    box-shadow: 0 10px 40px rgba(0, 0, 0, 0.35);
+}
+
+
+/* BOUTON FERMER */
+
+.fermer-fin-course {
+    position: absolute;
+
+    top: -18px;
+    right: -18px;
+
+    z-index: 10;
+
+    width: 48px;
+    height: 48px;
+
+    border: none;
+    border-radius: 50%;
+
+    background: white;
+
+    color: #555;
+
+    font-size: 32px;
+    font-weight: bold;
+
+    line-height: 1;
+
+    cursor: pointer;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.30);
+}
+
+
+.fermer-fin-course:hover {
+    transform: scale(1.05);
+}
+
+
+@media (max-width: 700px) {
+
+    .fenetre-fin-course {
+        padding: 12px;
+    }
+
+    .contenu-fin-course {
+        max-width: 94vw;
+        max-height: 90vh;
+    }
+
+    .image-fin-course {
+        max-width: 94vw;
+        max-height: 82vh;
+
+        border-radius: 15px;
+    }
+
+    .fermer-fin-course {
+        top: -10px;
+        right: -10px;
+
+        width: 42px;
+        height: 42px;
+
+        font-size: 28px;
+    }
+
+}
+</style>
+
+</head>
+
+
+<body>
+
+<main class="page-plantes">
+
+    <!-- =========================
+         RETOUR ACCUEIL
+    ========================= -->
+
+    <a href="../index.html" class="retour-accueil">
+        ← Retour à l'accueil
+    </a>
+
+
+    <!-- =========================
+         INTRODUCTION
+    ========================= -->
+
+    <section class="intro-plantes">
+
+        <div class="cadre-intro">
+
+            <div class="entete-plantes">
+
+                <h1>
+                    🌺 COURSE DES PLANTES
+                </h1>
+
+                <h2>
+                    PLANTES COMESTIBLES ET MÉDICINALES
+                </h2>
+
+                <p>
+                    Pars à la découverte des plantes présentes autour des étangs de
+                    <br>
+                    <strong>Mesnils-sur-Iton</strong>.
+                </p>
+
+            </div>
+
+        </div>
+
+    </section>
+
+
+    <!-- =========================
+         NOÉ
+    ========================= -->
+
+    <div class="bloc-noe-plantes">
+
+        <img
+            src="images/noe plantes.png"
+            alt="Noé"
+            class="image-noe-plantes"
+        >
+
+    </div>
+
+
+    <!-- =========================
+         PROGRESSION
+    ========================= -->
+
+    <section class="progression-plantes">
+
+        <div class="progression-titre">
+
+            <span>
+                🌺 TA PROGRESSION
+            </span>
+
+            <strong>
+                <span id="progression-plantes">0</span> / 13
+            </strong>
+
+        </div>
+
+        <div class="progression-barre">
+
+            <div
+                class="progression-remplie"
+                id="progression-remplie-plantes"
+            ></div>
+
+        </div>
+
+        <p id="texte-progression-plantes">
+            Choisis une forme pour commencer !
+        </p>
+
+    </section>
+
+
+    <!-- =========================
+         BOUTONS DE NAVIGATION
+    ========================= -->
+
+    <section class="navigation-plantes">
+
+        <button
+            type="button"
+            class="bouton-navigation"
+            id="bouton-carte"
+            onclick="afficherCarte()"
+        >
+            🗺️
+            <span>Voir la carte</span>
+        </button>
+
+
+        <button
+            type="button"
+            class="bouton-navigation"
+            id="bouton-formes"
+            onclick="afficherFormes()"
+        >
+            🔷
+            <span>Choisir une forme</span>
+        </button>
+
+    </section>
+
+
+    <!-- =========================
+         CARTE
+    ========================= -->
+
+    <section
+        class="zone-plantes"
+        id="zone-carte"
+    >
+
+        <div class="cadre-zone-plantes">
+
+            <h2>
+                🗺️ CARTE DU PARCOURS
+            </h2>
+
+            <div
+                class="carte-zoom-container"
+                id="carte-zoom-container"
+            >
+
+                <img
+                    src="images/carte-plantes.png"
+                    alt="Carte du parcours des plantes"
+                    class="carte-plantes-image"
+                    id="carte-plantes-image"
+                >
+
+            </div>
+
+        </div>
+
+    </section>
+
+
+    <!-- =========================
+         PARCOURS
+    ========================= -->
+
+    <section
+        class="zone-plantes"
+        id="zone-parcours"
+        style="display: none;"
+    >
+
+        <div class="cadre-zone-plantes">
+
+            <h2 id="titre-parcours">
+                🌿 TON PARCOURS
+            </h2>
+
+
+            <div
+                id="zone-deviner-plante"
+                class="zone-deviner-plante"
+                style="display: none;"
+            >
+
+                <h3>
+                    🌿 AS-TU TROUVÉ LA PLANTE ?
+                </h3>
+
+                <p>
+                    Tu peux tenter ta réponse quand tu veux.
+                    Si tu as besoin de plus de lettres, continue le parcours !
+                </p>
+
+                <select id="choix-plante">
+
+                    <option value="">
+                        -- Choisis une plante --
+                    </option>
+
+                    <option value="bardane">Bardane</option>
+                    <option value="coquelicot">Coquelicot</option>
+                    <option value="eglantier">Églantier</option>
+                    <option value="pissenlit">Pissenlit</option>
+                    <option value="plantain">Plantain</option>
+                    <option value="bourse-a-pasteur">Bourse à pasteur</option>
+                    <option value="menthe">Menthe</option>
+                    <option value="ortie">Ortie</option>
+                    <option value="sureau">Sureau</option>
+                    <option value="trefle">Trèfle</option>
+                    <option value="violette">Violette</option>
+                    <option value="ronce-commune">Ronce commune</option>
+                    <option value="lamier-blanc">Lamier blanc</option>
+
+                </select>
+
+
+                <button
+                    type="button"
+                    onclick="validerPlante()"
+                >
+                    VALIDER LA PLANTE
+                </button>
+
+
+                <p id="message-plante"></p>
+
+
+                <div
+                    id="fiche-plante"
+                    class="fiche-plante"
+                    style="display: none;"
+                >
+
+                    <h3>
+                        🌿 FICHE DE LA PLANTE
+                    </h3>
+
+                    <img
+                        id="image-fiche-plante"
+                        src=""
+                        alt="Fiche de la plante"
+                    >
+
+                </div>
+
+            </div>
+
+
+            <div class="progression-mot">
+
+                <p>
+                    🔤 <strong>LETTRES DÉCOUVERTES</strong>
+                </p>
+
+                <div
+                    id="lettres-decouvertes"
+                    class="lettres-pendu"
+                ></div>
+
+                <p id="progression-parcours"></p>
+
+            </div>
+
+
+            <div
+                id="bloc-balise"
+                class="bloc-balise"
+            >
+
+                <p id="texte-balise">
+                    Ta première balise est :
+                </p>
+
+                <strong
+                    id="premiere-balise"
+                    class="lettre-balise"
+                ></strong>
+
+                <p id="instruction-balise">
+                    Rends-toi à cette balise.
+                </p>
+
+
+                <div
+                    id="validation-balise"
+                    class="validation-balise"
+                >
+
+                    <p>
+                        Quand tu l'as trouvée, indique la balise suivante :
+                    </p>
+
+                    <input
+                        type="text"
+                        id="reponse-balise"
+                        maxlength="1"
+                        placeholder="?"
+                        autocomplete="off"
+                    >
+
+                    <button
+                        type="button"
+                        onclick="validerBalise()"
+                    >
+                        VALIDER
+                    </button>
+
+                    <p id="message-balise"></p>
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </section>
+
+
+    <!-- =========================
+         FORMES
+    ========================= -->
+
+    <section
+        class="zone-plantes"
+        id="zone-formes"
+    >
+
+        <div class="cadre-zone-plantes">
+
+            <h2>
+                🔷 CHOISIS TA FORME
+            </h2>
+
+            <p class="texte-zone-formes">
+                Chaque forme correspond à une plante. Choisis ton parcours pour commencer.
+            </p>
+
+
+            <div class="grille-formes">
+
+                <button type="button" class="bouton-forme" onclick="choisirForme('triangle')">
+                    <img src="images/01_triangle.png" alt="Triangle">
+                    <span class="niveau-forme">Niveau 1/5</span>
+                </button>
+
+                <button type="button" class="bouton-forme" onclick="choisirForme('ovale')">
+                    <img src="images/02_ovale.png" alt="Ovale">
+                    <span class="niveau-forme">Niveau 2/5</span>
+                </button>
+
+                <button type="button" class="bouton-forme" onclick="choisirForme('rectangle')">
+                    <img src="images/03_rectangle_arrondi.png" alt="Rectangle arrondi">
+                    <span class="niveau-forme">Niveau 3/5</span>
+                </button>
+
+                <button type="button" class="bouton-forme" onclick="choisirForme('fleche')">
+                    <img src="images/04_fleche.png" alt="Flèche">
+                    <span class="niveau-forme">Niveau 3/5</span>
+                </button>
+
+                <button type="button" class="bouton-forme" onclick="choisirForme('etoile')">
+                    <img src="images/05_etoile.png" alt="Étoile">
+                    <span class="niveau-forme">Niveau 2/5</span>
+                </button>
+
+                <button type="button" class="bouton-forme" onclick="choisirForme('visage')">
+                    <img src="images/06_visage.png" alt="Visage">
+                    <span class="niveau-forme">Niveau 5/5</span>
+                </button>
+
+                <button type="button" class="bouton-forme" onclick="choisirForme('eclair')">
+                    <img src="images/07_eclair.png" alt="Éclair">
+                    <span class="niveau-forme">Niveau 1/5</span>
+                </button>
+
+                <button type="button" class="bouton-forme" onclick="choisirForme('cylindre')">
+                    <img src="images/08_cylindre.png" alt="Cylindre">
+                    <span class="niveau-forme">Niveau 1/5</span>
+                </button>
+
+                <button type="button" class="bouton-forme" onclick="choisirForme('coeur')">
+                    <img src="images/09_coeur.png" alt="Cœur">
+                    <span class="niveau-forme">Niveau 1/5</span>
+                </button>
+
+                <button type="button" class="bouton-forme" onclick="choisirForme('bloc')">
+                    <img src="images/10_bloc.png" alt="Bloc">
+                    <span class="niveau-forme">Niveau 1/5</span>
+                </button>
+
+                <button type="button" class="bouton-forme" onclick="choisirForme('nuage')">
+                    <img src="images/11_nuage.png" alt="Nuage">
+                    <span class="niveau-forme">Niveau 2/5</span>
+                </button>
+
+                <button type="button" class="bouton-forme" onclick="choisirForme('plus')">
+                    <img src="images/12_plus.png" alt="Plus">
+                    <span class="niveau-forme">Niveau 4/5</span>
+                </button>
+
+                <button type="button" class="bouton-forme" onclick="choisirForme('vague')">
+                    <img src="images/13_vague.png" alt="Vague">
+                    <span class="niveau-forme">Niveau 4/5</span>
+                </button>
+
+            </div>
+
+
+            <div class="zone-recommencer-plantes">
+
+                <button
+                    type="button"
+                    id="bouton-recommencer-plantes"
+                    class="bouton-recommencer-plantes"
+                    onclick="recommencerParcours()"
+                >
+                    🔄 Recommencer le parcours plantes
+                </button>
+
+            </div>
+
+
+            <p class="texte-zone-formes-infos">
+                <em>
+                    Infos : Des lettres sont parfois en double.
+                    Tu peux prendre en photo les balises pour les prochaines plantes.
+                </em>
+            </p>
+
+        </div>
+
+    </section>
+
+
+    <!-- =========================
+         FENÊTRE NOÉ — FIN DE COURSE
+    ========================= -->
+
+    <div
+        id="fenetre-fin-course"
+        class="fenetre-fin-course"
+    >
+
+        <div class="contenu-fin-course">
+
+            <img
+                src="images/noe win plantes.png"
+                alt="Noé te félicite"
+                class="image-fin-course"
+            >
+
+            <button
+                type="button"
+                class="fermer-fin-course"
+                onclick="fermerFinCourse()"
+                aria-label="Fermer"
+            >
+                ×
+            </button>
+
+        </div>
+
+    </div>
+
+
+<script>
+
+/* =========================================================
+   NAVIGATION
+========================================================= */
+
+function afficherCarte() {
+
+    const carte = document.getElementById("zone-carte");
+    const formes = document.getElementById("zone-formes");
+    const parcours = document.getElementById("zone-parcours");
+
+    carte.style.display = "block";
+    formes.style.display = "none";
+    parcours.style.display = "none";
+
+    carte.scrollIntoView({
+        behavior: "smooth",
+        block: "start"
+    });
+}
+
+
+function afficherFormes() {
+
+    const carte = document.getElementById("zone-carte");
+    const formes = document.getElementById("zone-formes");
+    const parcours = document.getElementById("zone-parcours");
+
+    formes.style.display = "block";
+    carte.style.display = "none";
+    parcours.style.display = "none";
+
+    formes.scrollIntoView({
+        behavior: "smooth",
+        block: "start"
+    });
+}
+
+
+/* =========================================================
+   VARIABLES
+========================================================= */
+
+let formeChoisie = "";
+let etapeParcours = 0;
+let lettresDecouvertes = [];
+
+
+/* =========================================================
+   DONNÉES DES PARCOURS
+========================================================= */
+
+const donneesParcours = {
+
+    triangle: ["E", "A", "R", "N", "B", "D"],
+
+    ovale: ["T", "E", "U", "C", "O", "I", "L", "Q"],
+
+    rectangle: ["R", "A", "E", "N", "T", "I", "L", "G"],
+
+    fleche: ["I", "T", "S", "E", "N", "L", "P"],
+
+    etoile: ["P", "T", "I", "N", "L", "A"],
+
+    visage: ["B", "A", "R", "E", "O", "U", "S", "T", "P"],
+
+    eclair: ["M", "E", "T", "N", "H"],
+
+    cylindre: ["O", "T", "I", "E", "R"],
+
+    coeur: ["S", "E", "U", "R", "A"],
+
+    bloc: ["E", "R", "T", "L", "F"],
+
+    nuage: ["O", "E", "I", "L", "T", "V"],
+
+    plus: ["C", "O", "E", "N", "U", "M", "R"],
+
+    vague: ["L", "I", "A", "E", "M", "N", "C", "R", "B"]
+
+};
+
+
+const plantesParcours = {
+
+    triangle: "bardane",
+    ovale: "coquelicot",
+    rectangle: "eglantier",
+    fleche: "pissenlit",
+    etoile: "plantain",
+    visage: "bourse-a-pasteur",
+    eclair: "menthe",
+    cylindre: "ortie",
+    coeur: "sureau",
+    bloc: "trefle",
+    nuage: "violette",
+    plus: "ronce-commune",
+    vague: "lamier-blanc"
+
+};
+
+
+const nomsFormes = {
+
+    triangle: "TRIANGLE",
+    ovale: "OVALE",
+    rectangle: "RECTANGLE ARRONDI",
+    fleche: "FLÈCHE",
+    etoile: "ÉTOILE",
+    visage: "VISAGE",
+    eclair: "ÉCLAIR",
+    cylindre: "CYLINDRE",
+    coeur: "CŒUR",
+    bloc: "BLOC",
+    nuage: "NUAGE",
+    plus: "PLUS",
+    vague: "VAGUE"
+
+};
+
+
+/* =========================================================
+   SAUVEGARDE
+========================================================= */
+
+function cleSauvegarde(forme) {
+
+    return "coursePlantes_" + forme;
+
+}
+
+
+function chargerProgression(forme) {
+
+    const parcours = donneesParcours[forme];
+
+    const sauvegarde =
+        localStorage.getItem(cleSauvegarde(forme));
+
+
+    if (!sauvegarde) {
+
+        etapeParcours = 0;
+
+        lettresDecouvertes =
+            parcours ? [parcours[0]] : [];
+
+        return;
+    }
+
+
+    try {
+
+        const donnees =
+            JSON.parse(sauvegarde);
+
+        etapeParcours =
+            donnees.etape || 0;
+
+        lettresDecouvertes =
+            donnees.lettres || [];
+
+
+        if (
+            parcours &&
+            lettresDecouvertes.length === 0 &&
+            etapeParcours === 0
+        ) {
+
+            lettresDecouvertes =
+                [parcours[0]];
+
+        }
+
+    } catch (erreur) {
+
+        etapeParcours = 0;
+
+        lettresDecouvertes =
+            parcours ? [parcours[0]] : [];
+
+    }
+
+}
+
+
+function sauvegarderProgression(termine = null) {
+
+    if (!formeChoisie) return;
+
+
+    const ancienneSauvegarde =
+        localStorage.getItem(
+            cleSauvegarde(formeChoisie)
+        );
+
+
+    let ancienneTerminaison = false;
+
+
+    if (ancienneSauvegarde) {
+
+        try {
+
+            ancienneTerminaison =
+                JSON.parse(ancienneSauvegarde).termine === true;
+
+        } catch (erreur) {
+
+            ancienneTerminaison = false;
+
+        }
+
+    }
+
+
+    const statutTermine =
+        termine === true || ancienneTerminaison;
+
+
+    localStorage.setItem(
+
+        cleSauvegarde(formeChoisie),
+
+        JSON.stringify({
+
+            etape: etapeParcours,
+
+            lettres: lettresDecouvertes,
+
+            termine: statutTermine
+
+        })
+
+    );
+
+}
+
+
+/* =========================================================
+   FENÊTRE NOÉ
+========================================================= */
+
+function afficherFinCourse() {
+
+    const fenetre =
+        document.getElementById("fenetre-fin-course");
+
+    if (!fenetre) return;
+
+
+    if (
+        localStorage.getItem(
+            "plantes_fin_course_vue"
+        ) === "oui"
+    ) {
+
+        return;
+
+    }
+
+
+    fenetre.style.display = "flex";
+
+
+    localStorage.setItem(
+        "plantes_fin_course_vue",
+        "oui"
+    );
+
+}
+
+
+function fermerFinCourse() {
+
+    const fenetre =
+        document.getElementById("fenetre-fin-course");
+
+    if (fenetre) {
+
+        fenetre.style.display = "none";
+
+    }
+
+}
+
+
+/* =========================================================
+   PROGRESSION GLOBALE
+========================================================= */
+
+function actualiserProgressionGlobale() {
+
+    let nombreTermines = 0;
+
+
+    Object.keys(donneesParcours).forEach(
+        function(forme) {
+
+            const sauvegarde =
+                localStorage.getItem(
+                    cleSauvegarde(forme)
+                );
+
+
+            if (!sauvegarde) return;
+
+
+            try {
+
+                const donnees =
+                    JSON.parse(sauvegarde);
+
+
+                if (donnees.termine === true) {
+
+                    nombreTermines++;
+
+                }
+
+            } catch (erreur) {
+
+            }
+
+        }
+    );
+
+
+    const compteur =
+        document.getElementById(
+            "progression-plantes"
+        );
+
+
+    const barre =
+        document.getElementById(
+            "progression-remplie-plantes"
+        );
+
+
+    const texte =
+        document.getElementById(
+            "texte-progression-plantes"
+        );
+
+
+    if (compteur) {
+
+        compteur.textContent =
+            nombreTermines;
+
+    }
+
+
+    if (barre) {
+
+        barre.style.width =
+            ((nombreTermines / 13) * 100) + "%";
+
+    }
+
+
+    if (texte) {
+
+        texte.textContent =
+
+            nombreTermines === 13
+
+                ? "🎉 Bravo, toutes les plantes sont découvertes !"
+
+                : nombreTermines === 0
+
+                    ? "Choisis une forme pour commencer !"
+
+                    : nombreTermines +
+                      " plante" +
+                      (nombreTermines > 1 ? "s" : "") +
+                      " découverte" +
+                      (nombreTermines > 1 ? "s" : "") +
+                      " sur 13";
+
+    }
+
+
+    /* Affichage des formes terminées */
+
+    Object.keys(donneesParcours).forEach(
+        function(forme) {
+
+            const bouton =
+                document.querySelector(
+                    `.bouton-forme[onclick="choisirForme('${forme}')"]`
+                );
+
+
+            if (!bouton) return;
+
+
+            const sauvegarde =
+                localStorage.getItem(
+                    cleSauvegarde(forme)
+                );
+
+
+            let termine = false;
+
+
+            if (sauvegarde) {
+
+                try {
+
+                    termine =
+                        JSON.parse(sauvegarde).termine === true;
+
+                } catch (erreur) {
+
+                    termine = false;
+
+                }
+
+            }
+
+
+            bouton.classList.toggle(
+                "forme-terminee",
+                termine
+            );
+
+
+            let badge =
+                bouton.querySelector(
+                    ".badge-forme-terminee"
+                );
+
+
+            if (termine && !badge) {
+
+                badge =
+                    document.createElement("span");
+
+                badge.className =
+                    "badge-forme-terminee";
+
+                badge.textContent =
+                    "✓ Validée";
+
+                bouton.appendChild(badge);
+
+            }
+
+
+            if (!termine && badge) {
+
+                badge.remove();
+
+            }
+
+        }
+    );
+
+}
+
+
+/* =========================================================
+   LETTRES
+========================================================= */
+
+function afficherLettres() {
+
+    const zone =
+        document.getElementById(
+            "lettres-decouvertes"
+        );
+
+
+    const progression =
+        document.getElementById(
+            "progression-parcours"
+        );
+
+
+    if (!zone) return;
+
+
+    zone.innerHTML =
+        lettresDecouvertes
+
+            .map(
+                lettre =>
+                    `<span class="lettre-trouvee">${lettre}</span>`
+            )
+
+            .join(" ");
+
+
+    if (progression) {
+
+        progression.textContent =
+
+            lettresDecouvertes.length +
+            " lettre" +
+            (lettresDecouvertes.length > 1 ? "s" : "") +
+            " découverte" +
+            (lettresDecouvertes.length > 1 ? "s" : "");
+
+    }
+
+}
+
+
+/* =========================================================
+   BALISE ACTUELLE
+========================================================= */
+
+function afficherBaliseActuelle() {
+
+    const zoneBalise =
+        document.getElementById(
+            "premiere-balise"
+        );
+
+
+    const texteBalise =
+        document.getElementById(
+            "texte-balise"
+        );
+
+
+    const parcoursActuel =
+        donneesParcours[formeChoisie];
+
+
+    if (
+        !zoneBalise ||
+        !texteBalise ||
+        !parcoursActuel
+    ) {
+
+        return;
+
+    }
+
+
+    zoneBalise.textContent =
+        parcoursActuel[etapeParcours];
+
+
+    texteBalise.textContent =
+
+        etapeParcours === 0
+
+            ? "Ta première balise est :"
+
+            : "Prochaine balise :";
+
+}
+
+
+/* =========================================================
+   CHOIX D'UNE FORME
+========================================================= */
+
+function choisirForme(forme) {
+
+    formeChoisie = forme;
+
+
+    chargerProgression(forme);
+
+
+    const formes =
+        document.getElementById(
+            "zone-formes"
+        );
+
+
+    const carte =
+        document.getElementById(
+            "zone-carte"
+        );
+
+
+    const parcoursZone =
+        document.getElementById(
+            "zone-parcours"
+        );
+
+
+    const zoneDeviner =
+        document.getElementById(
+            "zone-deviner-plante"
+        );
+
+
+    formes.style.display = "none";
+
+    carte.style.display = "none";
+
+    parcoursZone.style.display = "block";
+
+
+    document.getElementById(
+        "titre-parcours"
+    ).textContent =
+        "🌿 PARCOURS " +
+        nomsFormes[forme];
+
+
+    document.getElementById(
+        "reponse-balise"
+    ).value = "";
+
+
+    document.getElementById(
+        "message-balise"
+    ).textContent = "";
+
+
+    document.getElementById(
+        "choix-plante"
+    ).value = "";
+
+
+    document.getElementById(
+        "message-plante"
+    ).textContent = "";
+
+
+    if (
+        lettresDecouvertes.length === 0 &&
+        donneesParcours[forme].length > 0
+    ) {
+
+        lettresDecouvertes =
+            [donneesParcours[forme][0]];
+
+    }
+
+
+    const sauvegarde =
+        localStorage.getItem(
+            cleSauvegarde(forme)
+        );
+
+
+    let termine = false;
+
+
+    if (sauvegarde) {
+
+        try {
+
+            termine =
+                JSON.parse(sauvegarde).termine === true;
+
+        } catch (erreur) {
+
+            termine = false;
+
+        }
+
+    }
+
+
+    afficherBaliseActuelle();
+
+    afficherLettres();
+
+    sauvegarderProgression();
+
+
+    const ficheExistante =
+        document.getElementById(
+            "fiche-plante"
+        );
+
+
+    if (termine) {
+
+        zoneDeviner.style.display =
+            "block";
+
+
+        document.getElementById(
+            "message-plante"
+        ).textContent =
+            "🎉 Cette forme est déjà terminée ! Plante découverte !";
+
+
+        if (ficheExistante) {
+
+            afficherFichePlante(forme);
+
+        }
+
+
+        document.getElementById(
+            "validation-balise"
+        ).style.display =
+            "none";
+
+
+        document.getElementById(
+            "bloc-balise"
+        ).style.display =
+            "none";
+
+    } else {
+
+        zoneDeviner.style.display =
+            lettresDecouvertes.length > 0
+                ? "block"
+                : "none";
+
+
+        document.getElementById(
+            "validation-balise"
+        ).style.display =
+            "block";
+
+
+        document.getElementById(
+            "bloc-balise"
+        ).style.display =
+            "block";
+
+
+        if (ficheExistante) {
+
+            ficheExistante.style.display =
+                "none";
+
+        }
+
+    }
+
+
+    actualiserProgressionGlobale();
+
+
+    parcoursZone.scrollIntoView({
+
+        behavior: "smooth",
+
+        block: "start"
+
+    });
+
+}
+
+
+/* =========================================================
+   VALIDATION BALISE
+========================================================= */
+
+function validerBalise() {
+
+    const reponse =
+        document
+            .getElementById(
+                "reponse-balise"
+            )
+            .value
+            .trim()
+            .toUpperCase();
+
+
+    const message =
+        document.getElementById(
+            "message-balise"
+        );
+
+
+    const parcoursActuel =
+        donneesParcours[formeChoisie];
+
+
+    if (!parcoursActuel) return;
+
+
+    const prochaineBalise =
+        parcoursActuel[
+            etapeParcours + 1
+        ];
+
+
+    if (!prochaineBalise) {
+
+        message.textContent =
+            "🎉 Toutes les balises ont été trouvées !";
+
+        return;
+
+    }
+
+
+    if (reponse !== prochaineBalise) {
+
+        message.textContent =
+            "❌ Ce n'est pas la bonne balise. Essaie encore.";
+
+        return;
+
+    }
+
+
+    lettresDecouvertes.push(
+        prochaineBalise
+    );
+
+
+    etapeParcours++;
+
+
+    sauvegarderProgression();
+
+    afficherLettres();
+
+
+    document.getElementById(
+        "reponse-balise"
+    ).value = "";
+
+
+    if (
+        etapeParcours >=
+        parcoursActuel.length - 1
+    ) {
+
+        document.getElementById(
+            "texte-balise"
+        ).textContent =
+            "🎉 Dernière balise trouvée !";
+
+
+        document.getElementById(
+            "premiere-balise"
+        ).textContent = "";
+
+
+        document.getElementById(
+            "instruction-balise"
+        ).textContent =
+            "Tu as trouvé la dernière balise !";
+
+
+        document.getElementById(
+            "validation-balise"
+        ).style.display =
+            "none";
+
+
+        message.textContent =
+            "Bravo ! Essaie maintenant de trouver la plante dans la liste.";
+
+        return;
+
+    }
+
+
+    afficherBaliseActuelle();
+
+
+    message.textContent =
+        "✅ Bonne balise ! Rends-toi à cette balise.";
+
+}
+
+
+/* =========================================================
+   CARTE ZOOMABLE
+========================================================= */
+
+const carteContainer =
+    document.getElementById(
+        "carte-zoom-container"
+    );
+
+
+const carteImage =
+    document.getElementById(
+        "carte-plantes-image"
+    );
+
+
+let zoom = 1;
+
+let positionX = 0;
+
+let positionY = 0;
+
+let startX = 0;
+
+let startY = 0;
+
+let startDistance = 0;
+
+let startZoom = 1;
+
+let dragging = false;
+
+let dernierTap = 0;
+
+
+function mettreAJourCarte() {
+
+    carteImage.style.transform =
+        `translate(${positionX}px, ${positionY}px) scale(${zoom})`;
+
+}
+
+
+carteContainer.addEventListener(
+    "touchstart",
+    function(e) {
+
+        if (e.touches.length === 2) {
+
+            dragging = false;
+
+            startDistance =
+                distanceEntreDoigts(
+                    e.touches[0],
+                    e.touches[1]
+                );
+
+            startZoom = zoom;
+
+            return;
+
+        }
+
+
+        if (
+            e.touches.length === 1 &&
+            zoom > 1
+        ) {
+
+            startX =
+                e.touches[0].clientX -
+                positionX;
+
+            startY =
+                e.touches[0].clientY -
+                positionY;
+
+            dragging = true;
+
+        }
+
+    },
+    { passive: false }
+);
+
+
+carteContainer.addEventListener(
+    "touchmove",
+    function(e) {
+
+        e.preventDefault();
+
+
+        if (e.touches.length === 2) {
+
+            const nouvelleDistance =
+                distanceEntreDoigts(
+                    e.touches[0],
+                    e.touches[1]
+                );
+
+
+            zoom =
+                startZoom *
+                (
+                    nouvelleDistance /
+                    startDistance
+                );
+
+
+            zoom =
+                Math.max(
+                    1,
+                    Math.min(6, zoom)
+                );
+
+
+            if (zoom === 1) {
+
+                positionX = 0;
+
+                positionY = 0;
+
+            }
+
+
+            mettreAJourCarte();
+
+            return;
+
+        }
+
+
+        if (
+            e.touches.length === 1 &&
+            dragging &&
+            zoom > 1
+        ) {
+
+            positionX =
+                e.touches[0].clientX -
+                startX;
+
+
+            positionY =
+                e.touches[0].clientY -
+                startY;
+
+
+            mettreAJourCarte();
+
+        }
+
+    },
+    { passive: false }
+);
+
+
+carteContainer.addEventListener(
+    "touchend",
+    function(e) {
+
+        dragging = false;
+
+
+        if (
+            e.touches.length === 0 &&
+            e.changedTouches.length === 1
+        ) {
+
+            const maintenant =
+                Date.now();
+
+
+            if (
+                maintenant -
+                dernierTap < 300
+            ) {
+
+                if (zoom === 1) {
+
+                    zoom = 2.5;
+
+                } else {
+
+                    zoom = 1;
+
+                    positionX = 0;
+
+                    positionY = 0;
+
+                }
+
+
+                mettreAJourCarte();
+
+                dernierTap = 0;
+
+            } else {
+
+                dernierTap = maintenant;
+
+            }
+
+        }
+
+    },
+    { passive: false }
+);
+
+
+function distanceEntreDoigts(
+    touche1,
+    touche2
+) {
+
+    const dx =
+        touche1.clientX -
+        touche2.clientX;
+
+
+    const dy =
+        touche1.clientY -
+        touche2.clientY;
+
+
+    return Math.sqrt(
+        dx * dx +
+        dy * dy
+    );
+
+}
+
+
+if (window.innerWidth <= 900) {
+
+    mettreAJourCarte();
+
+}
+
+
+/* =========================================================
+   FICHES PLANTES
+========================================================= */
+
+const fichesPlantes = {
+
+    bardane: "La bardane.png",
+
+    coquelicot: "Le coquelicot.png",
+
+    eglantier: "L'églantier.png",
+
+    pissenlit: "Le pissenlit.png",
+
+    plantain: "Le plantain.png",
+
+    "bourse-a-pasteur":
+        "La bourse à pasteur.png",
+
+    menthe: "Le menthe.png",
+
+    ortie: "L'ortie.png",
+
+    sureau: "Le sureau noir.png",
+
+    trefle: "Le trèfle.png",
+
+    violette: "La violette.png",
+
+    "ronce-commune":
+        "La ronce commune.png",
+
+    "lamier-blanc":
+        "Le lamier blanc.png"
+
+};
+
+
+function afficherFichePlante(forme) {
+
+    const plante =
+        plantesParcours[forme];
+
+
+    const fichier =
+        fichesPlantes[plante];
+
+
+    const fiche =
+        document.getElementById(
+            "fiche-plante"
+        );
+
+
+    const image =
+        document.getElementById(
+            "image-fiche-plante"
+        );
+
+
+    if (
+        !fiche ||
+        !image ||
+        !fichier
+    ) {
+
+        return;
+
+    }
+
+
+    image.src =
+        "images/Fiches/" +
+        fichier;
+
+
+    image.alt =
+        "Fiche de " +
+        plante;
+
+
+    fiche.style.display =
+        "block";
+
+}
+
+
+/* =========================================================
+   VALIDATION PLANTE
+========================================================= */
+
+function validerPlante() {
+
+    const choix =
+        document.getElementById(
+            "choix-plante"
+        ).value;
+
+
+    const message =
+        document.getElementById(
+            "message-plante"
+        );
+
+
+    if (etapeParcours < 1) {
+
+        message.textContent =
+            "🔎 Valide d'abord la première balise pour pouvoir deviner la plante.";
+
+        return;
+
+    }
+
+
+    if (!choix) {
+
+        message.textContent =
+            "Choisis une plante avant de valider.";
+
+        return;
+
+    }
+
+
+    if (
+        choix ===
+        plantesParcours[formeChoisie]
+    ) {
+
+        /* Validation définitive */
+
+        sauvegarderProgression(true);
+
+
+        message.textContent =
+            "🎉 BRAVO ! Tu as trouvé la bonne plante ! Cette forme est validée.";
+
+
+        afficherFichePlante(
+            formeChoisie
+        );
+
+
+        document.getElementById(
+            "validation-balise"
+        ).style.display =
+            "none";
+
+
+        document.getElementById(
+            "bloc-balise"
+        ).style.display =
+            "none";
+
+
+        actualiserProgressionGlobale();
+
+
+        /* Vérification des 13 formes */
+
+        const toutesLesFormesTerminees =
+            Object.keys(
+                donneesParcours
+            ).every(
+                function(forme) {
+
+                    const sauvegarde =
+                        localStorage.getItem(
+                            cleSauvegarde(forme)
+                        );
+
+
+                    if (!sauvegarde) {
+
+                        return false;
+
+                    }
+
+
+                    try {
+
+                        return JSON.parse(
+                            sauvegarde
+                        ).termine === true;
+
+                    } catch (erreur) {
+
+                        return false;
+
+                    }
+
+                }
+            );
+
+
+        /* =================================================
+           FIN DE COURSE : 13 / 13
+        ================================================= */
+
+        if (toutesLesFormesTerminees) {
+
+            /* On force l'affichage du 13/13 */
+
+            const compteur =
+                document.getElementById(
+                    "progression-plantes"
+                );
+
+            if (compteur) {
+
+                compteur.textContent = "13";
+
+            }
+
+
+            const barre =
+                document.getElementById(
+                    "progression-remplie-plantes"
+                );
+
+            if (barre) {
+
+                barre.style.width = "100%";
+
+            }
+
+
+            const texte =
+                document.getElementById(
+                    "texte-progression-plantes"
+                );
+
+            if (texte) {
+
+                texte.textContent =
+                    "🎉 Bravo, toutes les plantes sont découvertes !";
+
+            }
+
+
+            /* Affichage de Noé */
+
+            setTimeout(
+                function() {
+
+                    afficherFinCourse();
+
+                },
+                400
+            );
+
+        }
+
+    } else {
+
+        message.textContent =
+            "❌ Ce n'est pas la bonne plante. Continue ton parcours pour découvrir d'autres lettres !";
+
+    }
+
+}
+
+
+/* =========================================================
+   INITIALISATION
+========================================================= */
+
+actualiserProgressionGlobale();
+
+
+/* =========================================================
+   RECOMMENCER LE PARCOURS
+========================================================= */
+
+function recommencerParcours() {
+
+    const confirmation =
+        confirm(
+            "Veux-tu vraiment recommencer tout le parcours plantes ?\n\nToute la progression des 13 formes sera effacée."
+        );
+
+
+    if (!confirmation) return;
+
+
+    Object.keys(
+        donneesParcours
+    ).forEach(
+        function(forme) {
+
+            localStorage.removeItem(
+                cleSauvegarde(forme)
+            );
+
+        }
+    );
+
+
+    localStorage.removeItem(
+        "plantes_fin_course_vue"
+    );
+
+
+    const fenetreFinCourse =
+        document.getElementById(
+            "fenetre-fin-course"
+        );
+
+
+    if (fenetreFinCourse) {
+
+        fenetreFinCourse.style.display =
+            "none";
+
+    }
+
+
+    actualiserProgressionGlobale();
+
+
+    if (
+        formeChoisie &&
+        donneesParcours[formeChoisie]
+    ) {
+
+        etapeParcours = 0;
+
+
+        lettresDecouvertes =
+            [
+                donneesParcours[
+                    formeChoisie
+                ][0]
+            ];
+
+
+        sauvegarderProgression();
+
+
+        const messageBalise =
+            document.getElementById(
+                "message-balise"
+            );
+
+
+        const messagePlante =
+            document.getElementById(
+                "message-plante"
+            );
+
+
+        const choixPlante =
+            document.getElementById(
+                "choix-plante"
+            );
+
+
+        const blocBalise =
+            document.getElementById(
+                "bloc-balise"
+            );
+
+
+        const validationBalise =
+            document.getElementById(
+                "validation-balise"
+            );
+
+
+        const zoneDeviner =
+            document.getElementById(
+                "zone-deviner-plante"
+            );
+
+
+        if (messageBalise)
+            messageBalise.textContent = "";
+
+
+        if (messagePlante)
+            messagePlante.textContent = "";
+
+
+        if (choixPlante)
+            choixPlante.value = "";
+
+
+        if (blocBalise)
+            blocBalise.style.display = "block";
+
+
+        if (validationBalise)
+            validationBalise.style.display = "block";
+
+
+        if (zoneDeviner)
+            zoneDeviner.style.display = "none";
+
+
+        afficherBaliseActuelle();
+
+        afficherLettres();
+
+    }
+
+
+    alert(
+        "🌿 Le parcours plantes a été remis à zéro !"
+    );
+
+}
+
+</script>
+
+</main>
+
+</body>
+
+</html>
